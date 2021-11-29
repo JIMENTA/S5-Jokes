@@ -3,7 +3,8 @@
 }
 
 body{
-    background-color: #686de0;
+    background: url('img/blob.svg');
+    background-repeat:inherit;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,7 +25,6 @@ body{
 h3 {
     margin: 0;
     letter-spacing: 2px;
-    opacity: 0.5;
 }
 
 .joke {
@@ -35,13 +35,14 @@ h3 {
 }
 
 .btn {
-    background-color:#9f68e0;
+    border: #000;
     border: 0;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0, 0.1), 0 6px 6px rgba(0,0,0, 0.1);
-    color: #fff;
+    color: #000;
     font-size: 16px;
     padding: 14px 40px;
+    cursor: pointer;
 }
 .btn:active{
     transform: scale(0.98);
