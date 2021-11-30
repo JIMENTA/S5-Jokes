@@ -8,13 +8,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const jokeEl = document.getElementById('joke');
-const get_joke = document.getElementById('get_joke'); // ! es que no va a ser null
-get_joke.addEventListener('click', tellAJoke);
+const jokeElement = document.getElementById('joke');
+const otherJoke = document.getElementById('otherJoke'); // ! es que no va a ser null
+otherJoke.addEventListener('click', tellAJoke);
+const notGood = document.getElementById('1');
+notGood.addEventListener('click', () => scoreJoke(joke, 1));
+const regular = document.getElementById('2');
+notGood.addEventListener('click', () => scoreJoke(joke, 2));
+const goodJoke = document.getElementById('3');
+notGood.addEventListener('click', () => scoreJoke(joke, 3));
 let joke;
 function tellAJoke() {
     return __awaiter(this, void 0, void 0, function* () {
-        //llamada a la API
         const jokeResult = yield fetch('https://icanhazdadjoke.com/', {
             headers: {
                 'Accept': 'application/json'
@@ -22,7 +27,7 @@ function tellAJoke() {
         });
         joke = yield jokeResult.json();
         console.log(joke);
-        jokeEl.innerHTML = joke.joke;
+        jokeElement.innerHTML = joke.joke; // es el string denro de la interface
     });
 }
 function scoreJoke(joke, resultado) {
@@ -32,6 +37,7 @@ function scoreJoke(joke, resultado) {
         date: new Date().toISOString()
     };
     jokesReports.push(jokeReport);
+    console.log(jokesReports);
 }
 const jokesReports = [];
 //# sourceMappingURL=first.js.map

@@ -1,13 +1,28 @@
 
-const jokeEl : HTMLElement = document.getElementById('joke')!;
-const get_joke : HTMLElement = document.getElementById('get_joke')! // ! es que no va a ser null
+const jokeElement : HTMLElement = document.getElementById('joke')!;
 
-get_joke.addEventListener('click',tellAJoke)
+const otherJoke : HTMLElement = document.getElementById('otherJoke')! // ! es que no va a ser null
+otherJoke.addEventListener('click',tellAJoke)
+
+const notGood : HTMLElement = document.getElementById('1')!;
+notGood.addEventListener('click',() => scoreJoke(joke, 1))
+
+const regular : HTMLElement = document.getElementById('2')!;
+notGood.addEventListener('click',() => scoreJoke(joke, 2))
+
+const goodJoke : HTMLElement = document.getElementById('3')!;
+notGood.addEventListener('click',() => scoreJoke(joke, 3))
+
+
 let joke : Joke 
 
+interface Joke{
+    id : string;
+    joke : string;
+}
+
 async function tellAJoke(){
-    //llamada a la API
-    const jokeResult = await fetch('https://icanhazdadjoke.com/',{
+    const jokeResult = await fetch('https://icanhazdadjoke.com/',{ //llamada a la API
         headers:{
             'Accept': 'application/json'
         }
@@ -15,13 +30,10 @@ async function tellAJoke(){
 
     joke = await jokeResult.json();
     console.log(joke);
-    jokeEl.innerHTML = joke.joke
+    jokeElement.innerHTML = joke.joke // es el string denro de la interface
 }
 
-interface Joke{
-    id : string;
-    joke : string;
-}
+
 interface JokesReports {
     joke : Joke;
     resultado : number;
@@ -35,6 +47,10 @@ function scoreJoke(joke : Joke, resultado : number){
         date : new Date().toISOString()
     }
     jokesReports.push(jokeReport)
+    console.log(jokesReports)
 }
 
 const jokesReports: JokesReports[] = [] 
+
+
+

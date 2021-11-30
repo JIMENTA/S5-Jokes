@@ -1,10 +1,10 @@
-*{
+* {
     box-sizing: border-box;
 }
 
-body{
+body {
     background: url('img/blob.svg');
-    background-repeat:inherit;
+    background-repeat: inherit;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,10 +12,10 @@ body{
     margin: 0;
 }
 
-.container{
+.container {
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0,0,0, 0.1),0 6px 6px rgba(0,0,0, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.1);
     padding: 50px 20px;
     max-width: 100%;
     width: 800px;
@@ -34,19 +34,26 @@ h3 {
     max-width: 600px;
 }
 
+.btn-emoji {
+    font-size: 30px;
+}
+
 .btn {
     border: #000;
     border: 0;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0, 0.1), 0 6px 6px rgba(0,0,0, 0.1);
+    margin-bottom: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.1);
     color: #000;
-    font-size: 16px;
+    font-size: 20px;
     padding: 14px 40px;
     cursor: pointer;
 }
-.btn:active{
+
+.btn:active {
     transform: scale(0.98);
 }
-.btn:focus{
+
+.btn:focus {
     outline: 0;
 }
