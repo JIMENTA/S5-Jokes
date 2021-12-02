@@ -14,9 +14,9 @@ otherJoke.addEventListener('click', tellAJoke);
 const notGood = document.getElementById('1');
 notGood.addEventListener('click', () => scoreJoke(joke, 1));
 const regular = document.getElementById('2');
-notGood.addEventListener('click', () => scoreJoke(joke, 2));
+regular.addEventListener('click', () => scoreJoke(joke, 2));
 const goodJoke = document.getElementById('3');
-notGood.addEventListener('click', () => scoreJoke(joke, 3));
+goodJoke.addEventListener('click', () => scoreJoke(joke, 3));
 let joke;
 function tellAJoke() {
     return __awaiter(this, void 0, void 0, function* () {

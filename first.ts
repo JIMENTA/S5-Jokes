@@ -8,10 +8,10 @@ const notGood : HTMLElement = document.getElementById('1')!;
 notGood.addEventListener('click',() => scoreJoke(joke, 1))
 
 const regular : HTMLElement = document.getElementById('2')!;
-notGood.addEventListener('click',() => scoreJoke(joke, 2))
+regular.addEventListener('click',() => scoreJoke(joke, 2))
 
 const goodJoke : HTMLElement = document.getElementById('3')!;
-notGood.addEventListener('click',() => scoreJoke(joke, 3))
+goodJoke.addEventListener('click',() => scoreJoke(joke, 3))
 
 
 let joke : Joke 
