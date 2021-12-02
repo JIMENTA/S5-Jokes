@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+showWeather();
 const jokeElement = document.getElementById('joke');
 const otherJoke = document.getElementById('otherJoke'); // ! es que no va a ser null
 otherJoke.addEventListener('click', tellAJoke);
@@ -40,4 +41,14 @@ function scoreJoke(joke, resultado) {
     console.log(jokesReports);
 }
 const jokesReports = [];
+//NIVEL 2
+const weatherElement = document.getElementById('weather');
+function showWeather() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const weatherResult = yield fetch('https://api.openweathermap.org/data/2.5/weather?id=1726705&appid=2ee86dc5e225404ed626762debc246f5&img/wn/04n'); //llamada a la API
+        let weather = yield weatherResult.json();
+        console.log(weather);
+        weatherElement.innerHTML = weather; // es el string denro de la interface
+    });
+}
 //# sourceMappingURL=first.js.map

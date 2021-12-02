@@ -1,4 +1,4 @@
-
+showWeather()
 const jokeElement : HTMLElement = document.getElementById('joke')!;
 
 const otherJoke : HTMLElement = document.getElementById('otherJoke')! // ! es que no va a ser null
@@ -54,4 +54,18 @@ function scoreJoke(joke : Joke, resultado : number){
 const jokesReports: JokesReports[] = [] 
 
 
+//NIVEL 2
+const weatherElement : HTMLElement = document.getElementById('weather')!;
 
+interface Weather {
+    weather : []
+}
+
+async function showWeather(){
+    const weatherResult = await fetch('https://api.openweathermap.org/data/2.5/weather?id=1726705&appid=2ee86dc5e225404ed626762debc246f5&img/wn/04n')//llamada a la API
+ 
+    let weather = await weatherResult.json();
+    console.log(weather);
+    weatherElement.innerHTML = weather // es el string denro de la interface
+  
+}
