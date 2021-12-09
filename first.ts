@@ -57,15 +57,24 @@ const jokesReports: JokesReports[] = []
 //NIVEL 2
 const weatherElement : HTMLElement = document.getElementById('weather')!;
 
-interface Weather {
-    weather : []
+interface Item {
+    description: string;
+    icon: string;
+    id: number;
+    main: string;
 }
+
+interface Weather {
+    weather: Item[]
+}
+
 
 async function showWeather(){
     const weatherResult = await fetch('https://api.openweathermap.org/data/2.5/weather?id=1726705&appid=2ee86dc5e225404ed626762debc246f5&img/wn/04n')//llamada a la API
  
-    let weather = await weatherResult.json();
-    console.log(weather);
-    weatherElement.innerHTML = weather // es el string denro de la interface
-  
+    let weather: Weather = await weatherResult.json();
+    console.log(weather.weather[0].icon);
+    weatherElement.innerHTML = weather.weather[0].icon 
 }
+
+
