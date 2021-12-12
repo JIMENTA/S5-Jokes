@@ -67,14 +67,16 @@ interface Item {
 interface Weather {
     weather: Item[]
 }
-
+function getImgSrc (weather : string) {
+    return `http://openweathermap.org/img/wn/${weather}@2x.png`
+  }
 
 async function showWeather(){
     const weatherResult = await fetch('https://api.openweathermap.org/data/2.5/weather?id=1726705&appid=2ee86dc5e225404ed626762debc246f5&img/wn/04n')//llamada a la API
  
     let weather: Weather = await weatherResult.json();
     console.log(weather.weather[0].icon);
-    weatherElement.innerHTML = weather.weather[0].icon 
+    weatherElement.innerHTML = weather.weather[0].icon
 }
 
 

@@ -43,6 +43,9 @@ function scoreJoke(joke, resultado) {
 const jokesReports = [];
 //NIVEL 2
 const weatherElement = document.getElementById('weather');
+function getImgSrc(weather) {
+    return `http://openweathermap.org/img/wn/${weather}@2x.png`;
+}
 function showWeather() {
     return __awaiter(this, void 0, void 0, function* () {
         const weatherResult = yield fetch('https://api.openweathermap.org/data/2.5/weather?id=1726705&appid=2ee86dc5e225404ed626762debc246f5&img/wn/04n'); //llamada a la API
