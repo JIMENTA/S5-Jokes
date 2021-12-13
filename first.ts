@@ -1,4 +1,4 @@
-showWeather()
+
 const jokeElement : HTMLElement = document.getElementById('joke')!;
 
 const otherJoke : HTMLElement = document.getElementById('otherJoke')! // ! es que no va a ser null
@@ -58,25 +58,31 @@ const jokesReports: JokesReports[] = []
 const weatherElement : HTMLElement = document.getElementById('weather')!;
 
 interface Item {
-    description: string;
     icon: string;
-    id: number;
-    main: string;
 }
-
 interface Weather {
     weather: Item[]
 }
-function getImgSrc (weather : string) {
-    return `http://openweathermap.org/img/wn/${weather}@2x.png`
-  }
-
-async function showWeather(){
-    const weatherResult = await fetch('https://api.openweathermap.org/data/2.5/weather?id=1726705&appid=2ee86dc5e225404ed626762debc246f5&img/wn/04n')//llamada a la API
- 
-    let weather: Weather = await weatherResult.json();
-    console.log(weather.weather[0].icon);
-    weatherElement.innerHTML = weather.weather[0].icon
+function getImgSrc (icon :string) {
+    return `http://openweathermap.org/img/wn/${icon}@2x.png`
 }
 
+
+function getTemp (temp : number){
+    console.log(temp)
+    return temp
+}
+
+
+async function showWeather(){
+    const weatherResult = await fetch('https://api.openweathermap.org/data/2.5/weather?id=1726705&appid=2ee86dc5e225404ed626762debc246f5')
+ 
+    let weather: Weather = await weatherResult.json();
+    console.log(weather)
+    weatherElement.appendChild(document.createElement('img')).src = getImgSrc(weather.weather[0].icon)
+    // weatherElement.appendChild(document.createElement<'div'>)= getTemp(temp)
+    
+}
+
+showWeather()
 

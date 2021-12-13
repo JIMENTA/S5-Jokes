@@ -8,7 +8,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-showWeather();
 const jokeElement = document.getElementById('joke');
 const otherJoke = document.getElementById('otherJoke'); // ! es que no va a ser null
 otherJoke.addEventListener('click', tellAJoke);
@@ -43,15 +42,21 @@ function scoreJoke(joke, resultado) {
 const jokesReports = [];
 //NIVEL 2
 const weatherElement = document.getElementById('weather');
-function getImgSrc(weather) {
-    return `http://openweathermap.org/img/wn/${weather}@2x.png`;
+function getImgSrc(icon) {
+    return `http://openweathermap.org/img/wn/${icon}@2x.png`;
+}
+function getTemp(temp) {
+    console.log(temp);
+    return temp;
 }
 function showWeather() {
     return __awaiter(this, void 0, void 0, function* () {
-        const weatherResult = yield fetch('https://api.openweathermap.org/data/2.5/weather?id=1726705&appid=2ee86dc5e225404ed626762debc246f5&img/wn/04n'); //llamada a la API
+        const weatherResult = yield fetch('https://api.openweathermap.org/data/2.5/weather?id=1726705&appid=2ee86dc5e225404ed626762debc246f5');
         let weather = yield weatherResult.json();
-        console.log(weather.weather[0].icon);
-        weatherElement.innerHTML = weather.weather[0].icon;
+        console.log(weather);
+        weatherElement.appendChild(document.createElement('img')).src = getImgSrc(weather.weather[0].icon);
+        // weatherElement.appendChild(document.createElement<'div'>)= getTemp(temp)
     });
 }
+showWeather();
 //# sourceMappingURL=first.js.map
