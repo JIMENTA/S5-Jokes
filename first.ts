@@ -29,7 +29,6 @@ async function tellAJoke(){
     })
 
     joke = await jokeResult.json();
-    console.log(joke);
     jokeElement.innerHTML = joke.joke // es el string denro de la interface
   
 }
