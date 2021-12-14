@@ -33,6 +33,12 @@ async function tellAJoke(){
   
 }
 
+async function tellAOtherJoke(){
+    fetch('https://api.chucknorris.io/jokes/random')
+   .then (res => res.json())
+   .then (data => console.log(data))
+   .catch (error => console.log('ERROR'))
+}
 
 interface JokesReports {
     joke : Joke;
@@ -75,9 +81,7 @@ function getTemp (temp : number){
 
 async function showWeather(){
     const weatherResult = await fetch('https://api.openweathermap.org/data/2.5/weather?id=1726705&appid=2ee86dc5e225404ed626762debc246f5')
- 
     let weather: Weather = await weatherResult.json();
-    console.log(weather)
     weatherElement.appendChild(document.createElement('img')).src = getImgSrc(weather.weather[0].icon)
     // weatherElement.appendChild(document.createElement<'div'>)= getTemp(temp)
     
@@ -85,3 +89,4 @@ async function showWeather(){
 
 showWeather()
 
+tellAOtherJoke()
