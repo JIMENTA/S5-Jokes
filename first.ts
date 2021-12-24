@@ -2,7 +2,7 @@ showWeather()
 const jokeElement : HTMLElement = document.getElementById('joke')!;
 
 const otherJoke : HTMLElement = document.getElementById('otherJoke')! // ! es que no va a ser null
-otherJoke.addEventListener('click',tellAJoke)
+otherJoke.addEventListener('click',randomJoke)
 
 const notGood : HTMLElement = document.getElementById('1')!;
 notGood.addEventListener('click',() => scoreJoke(joke, 1))
@@ -58,51 +58,38 @@ const weatherElement : HTMLElement = document.getElementById('weather')!;
 interface Item {
     icon: string;
 }
+
 interface Weather {
     weather: Item[]
+    main : {temp : number}
+
 }
 function getImgSrc (icon :string) {
     return `http://openweathermap.org/img/wn/${icon}@2x.png`
 }
 
 
-function getTemp (temp : number){
-    console.log(temp)
-    return temp
-}
-
-
 async function showWeather(){
-    const weatherResult = await fetch('https://api.openweathermap.org/data/2.5/weather?id=1726705&appid=2ee86dc5e225404ed626762debc246f5')
+    const weatherResult = await fetch('https://api.openweathermap.org/data/2.5/weather?id=1726705&appid=2ee86dc5e225404ed626762debc246f5&units=metric')
     let weather: Weather = await weatherResult.json();
-    weatherElement.appendChild(document.createElement('img')).src = getImgSrc(weather.weather[0].icon)
-    // weatherElement.appendChild(document.createElement<'div'>)= getTemp(temp)
     
+    weatherElement.appendChild(document.createElement('img')).src = getImgSrc(weather.weather[0].icon);
+    document.querySelector('#temp')!.innerHTML = weather.main.temp.toString() + ' º'
 }
 
 
-async function tellAOtherJoke(){
+function tellAOtherJoke(){
     fetch('https://api.chucknorris.io/jokes/random')
    .then (res => res.json())
-   .then (data => console.log(data))
+   .then (data => jokeElement.innerHTML = data.value)
    .catch (error => console.log('ERROR'))
 }
 
+let jokesFunctions = [tellAJoke, tellAOtherJoke]
 
-fetch('https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random', {
-	method: "GET",
-	headers: {
-		"accept": "application/json",
-		"x-rapidapi-host": "matchilling-chuck-norris-jokes-v1.p.rapidapi.com",
-		"x-rapidapi-key": "a038a5c47cmshe079b7f5130b22dp19582ejsn41a02b64b357"
-	}
-})
-.then(response => {
-	
-    
-    console.log(response);
-})
-.catch(err => {
-	console.error(err);
-});
-tellAOtherJoke()
+function randomJoke(){
+   const index =  Math.floor(Math.random() * jokesFunctions.length)
+   const jokeFunction = jokesFunctions[index]
+   jokeFunction()
+}
+

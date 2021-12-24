@@ -13,13 +13,28 @@ body {
 header {
     padding: 50px;
     margin: 0px;
+    display: flex;
+    align-items: center;
+}
+
+img {
+    max-width: 70px;
+}
+
+.temp {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.bar {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 5px;
 }
 
 .container {
-    margin: 50px;
     max-width: 100%;
     text-align: center;
- 
 }
 
 h3 {
