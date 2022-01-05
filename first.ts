@@ -1,4 +1,15 @@
+let imagenes : string [] = ['./img/blob (2).svg', './img/blob (1).svg','./img/blob (3).svg','./img/blob (4).svg','./img/blob.svg',]
+
+function changesImg(){
+    let currentImg = Math.floor(Math.random() * imagenes.length)
+    document.body.style.background= `url('${imagenes[currentImg]}')`
+    
+}
+
+
 showWeather()
+
+
 const jokeElement : HTMLElement = document.getElementById('joke')!;
 
 const otherJoke : HTMLElement = document.getElementById('otherJoke')! // ! es que no va a ser null
@@ -64,7 +75,7 @@ interface Weather {
     main : {temp : number}
 
 }
-function getImgSrc (icon :string) {
+function getIconWeather (icon :string) {
     return `http://openweathermap.org/img/wn/${icon}@2x.png`
 }
 
@@ -73,23 +84,23 @@ async function showWeather(){
     const weatherResult = await fetch('https://api.openweathermap.org/data/2.5/weather?id=1726705&appid=2ee86dc5e225404ed626762debc246f5&units=metric')
     let weather: Weather = await weatherResult.json();
     
-    weatherElement.appendChild(document.createElement('img')).src = getImgSrc(weather.weather[0].icon);
-    document.querySelector('#temp')!.innerHTML = weather.main.temp.toString() + ' º'
+    weatherElement.appendChild(document.createElement('img')).src = getIconWeather (weather.weather[0].icon);
+    document.querySelector('#temp')!.innerHTML = parseInt(weather.main.temp.toString()) + ' º'
 }
 
 
-function tellAOtherJoke(){
-    fetch('https://api.chucknorris.io/jokes/random')
-   .then (res => res.json())
-   .then (data => jokeElement.innerHTML = data.value)
-   .catch (error => console.log('ERROR'))
+async function tellAOtherJoke(){
+   const otherResult= await fetch('https://api.chucknorris.io/jokes/random')
+   const jsonResult= await otherResult.json()
+   jokeElement.innerHTML = jsonResult.value
 }
 
 let jokesFunctions = [tellAJoke, tellAOtherJoke]
 
-function randomJoke(){
+ async function randomJoke(){
    const index =  Math.floor(Math.random() * jokesFunctions.length)
    const jokeFunction = jokesFunctions[index]
-   jokeFunction()
+   await jokeFunction()
+   changesImg()
 }
 

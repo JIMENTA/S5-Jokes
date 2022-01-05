@@ -8,6 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+let imagenes = ['./img/blob (2).svg', './img/blob (1).svg', './img/blob (3).svg', './img/blob (4).svg', './img/blob.svg',];
+function changesImg() {
+    let currentImg = Math.floor(Math.random() * imagenes.length);
+    document.body.style.background = `url('${imagenes[currentImg]}')`;
+}
 showWeather();
 const jokeElement = document.getElementById('joke');
 const otherJoke = document.getElementById('otherJoke'); // ! es que no va a ser null
@@ -42,27 +47,31 @@ function scoreJoke(joke, resultado) {
 const jokesReports = [];
 //NIVEL 2
 const weatherElement = document.getElementById('weather');
-function getImgSrc(icon) {
+function getIconWeather(icon) {
     return `http://openweathermap.org/img/wn/${icon}@2x.png`;
 }
 function showWeather() {
     return __awaiter(this, void 0, void 0, function* () {
         const weatherResult = yield fetch('https://api.openweathermap.org/data/2.5/weather?id=1726705&appid=2ee86dc5e225404ed626762debc246f5&units=metric');
         let weather = yield weatherResult.json();
-        weatherElement.appendChild(document.createElement('img')).src = getImgSrc(weather.weather[0].icon);
-        document.querySelector('#temp').innerHTML = weather.main.temp.toString() + ' º';
+        weatherElement.appendChild(document.createElement('img')).src = getIconWeather(weather.weather[0].icon);
+        document.querySelector('#temp').innerHTML = parseInt(weather.main.temp.toString()) + ' º';
     });
 }
 function tellAOtherJoke() {
-    fetch('https://api.chucknorris.io/jokes/random')
-        .then(res => res.json())
-        .then(data => jokeElement.innerHTML = data.value)
-        .catch(error => console.log('ERROR')); //PONER AWAIT 
+    return __awaiter(this, void 0, void 0, function* () {
+        const otherResult = yield fetch('https://api.chucknorris.io/jokes/random');
+        const jsonResult = yield otherResult.json();
+        jokeElement.innerHTML = jsonResult.value;
+    });
 }
 let jokesFunctions = [tellAJoke, tellAOtherJoke];
 function randomJoke() {
-    const index = Math.floor(Math.random() * jokesFunctions.length);
-    const jokeFunction = jokesFunctions[index];
-    jokeFunction();
+    return __awaiter(this, void 0, void 0, function* () {
+        const index = Math.floor(Math.random() * jokesFunctions.length);
+        const jokeFunction = jokesFunctions[index];
+        yield jokeFunction();
+        changesImg();
+    });
 }
 //# sourceMappingURL=first.js.map
